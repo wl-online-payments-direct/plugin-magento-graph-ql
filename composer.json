@@ -1,0 +1,29 @@
+{
+    "name": "worldline/module-magento-payment-graph-ql",
+    "description": "Worldline Online Payments",
+    "require": {
+        "php": ">=7.3",
+        "ext-json": "*",
+        "worldline/module-magento-payment-credit-card": "1.8.0",
+        "worldline/module-magento-payment-redirect-payment": "1.7.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "MIT"
+    ],
+    "authors": [
+        {
+            "name": "Worldline Online Payments",
+            "homepage": "https://worldline.com/"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Worldline\\GraphQl\\": ""
+        }
+    }
+}

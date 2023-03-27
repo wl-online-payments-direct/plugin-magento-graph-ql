@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\SalesGraphQl\Model\Order\OrderPayments">
+        <plugin name="WorldlinePaymentGraphQlAddPaymentDetails"
+                type="Worldline\GraphQl\Plugin\Model\Order\OrderPayments\AddPaymentDetails"/>
+    </type>
+    <type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+        <arguments>
+            <argument name="extendedConfigData" xsi:type="array">
+                <item name="worldline_pwa_route" xsi:type="string">worldline_payment/general_settings/pwa_route</item>
+                <item name="worldline_is_apply_surcharge" xsi:type="string">worldline_payment/general_settings/apply_surcharge</item>
+                <item name="worldline_cc_vault_active" xsi:type="string">payment/worldline_cc_vault/active</item>
+                <item name="worldline_payment_credit_card_allowspecific" xsi:type="string">payment/worldline_cc/allowspecific</item>
+                <item name="worldline_payment_credit_card_specificcountry" xsi:type="string">payment/worldline_cc/specificcountry</item>
+                <item name="worldline_payment_hosted_checkout_allowspecific" xsi:type="string">payment/worldline_hosted_checkout/allowspecific</item>
+                <item name="worldline_payment_hosted_checkout_specificcountry" xsi:type="string">payment/worldline_hosted_checkout/specificcountry</item>
+                <item name="worldline_redirect_payment_allowspecific" xsi:type="string">payment/worldline_redirect_payment/allowspecific</item>
+                <item name="worldline_redirect_payment_specificcountry" xsi:type="string">payment/worldline_redirect_payment/specificcountry</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\QuoteGraphQl\Model\Cart\Payment\AdditionalDataProviderPool">
+        <arguments>
+            <argument name="dataProviders" xsi:type="array">
+                <item name="worldline_cc" xsi:type="object">Worldline\GraphQl\Model\CreditCard\AdditionalDataProvider</item>
+                <item name="worldline_cc_vault" xsi:type="object">Worldline\GraphQl\Model\VaultDataProvider</item>
+                <item name="worldline_hosted_checkout" xsi:type="object">Worldline\GraphQl\Model\HostedCheckout\AdditionalDataProvider</item>
+                <item name="worldline_hosted_checkout_vault" xsi:type="object">Worldline\GraphQl\Model\VaultDataProvider</item>
+                <item name="worldline_redirect_payment_1" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\AdditionalDataProvider</item>
+                <item name="worldline_redirect_payment_2" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\AdditionalDataProvider</item>
+                <item name="worldline_redirect_payment_3" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\AdditionalDataProvider</item>
+                <item name="worldline_redirect_payment_117" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\AdditionalDataProvider</item>
+                <item name="worldline_redirect_payment_125" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\AdditionalDataProvider</item>
+                <item name="worldline_redirect_payment_130" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\AdditionalDataProvider</item>
+                <item name="worldline_redirect_payment_132" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\AdditionalDataProvider</item>
+                <item name="worldline_redirect_payment_3012" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\AdditionalDataProvider</item>
+                <item name="worldline_redirect_payment_1_vault" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\VaultDataProvider</item>
+                <item name="worldline_redirect_payment_2_vault" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\VaultDataProvider</item>
+                <item name="worldline_redirect_payment_3_vault" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\VaultDataProvider</item>
+                <item name="worldline_redirect_payment_117_vault" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\VaultDataProvider</item>
+                <item name="worldline_redirect_payment_125_vault" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\VaultDataProvider</item>
+                <item name="worldline_redirect_payment_130_vault" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\VaultDataProvider</item>
+                <item name="worldline_redirect_payment_132_vault" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\VaultDataProvider</item>
+                <item name="worldline_redirect_payment_3012_vault" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\VaultDataProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\VaultGraphQl\Model\Resolver\PaymentTokens">
+        <plugin sortOrder="100"
+                name="WorldlinePaymentGraphQlPaymentTokens"
+                type="Worldline\GraphQl\Plugin\Model\Resolver\PaymentTokens"/>
+    </type>
+
+    <type name="Worldline\GraphQl\Model\PaymentIcons\IconsPool">
+        <arguments>
+            <argument name="iconsRetrievers" xsi:type="array">
+                <item name="worldline_cc" xsi:type="object">Worldline\GraphQl\Model\CreditCard\IconsRetriever</item>
+                <item name="worldline_hosted_checkout" xsi:type="object">Worldline\GraphQl\Model\HostedCheckout\IconsRetriever</item>
+                <item name="worldline_redirect_payment_" xsi:type="object">Worldline\GraphQl\Model\RedirectPayment\IconsRetriever</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
