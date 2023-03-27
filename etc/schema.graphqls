@@ -1,0 +1,178 @@
+type Query {
+    checkRedirect(incrementId: String!): CheckRedirectOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\Redirect") @doc(description: "Retrieve redirect status.")
+    checkOrder(incrementId: String!): Boolean @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CheckOrder") @doc(description: "Check if exist the order.")
+    processPendingOrder(incrementId: String!): Boolean @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\ProcessPendingOrder") @doc(description: "Send request to payment system and place order.")
+    getWorldlineConfig: WorldlineConfig @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CreditCard\\WorldlineConfig") @doc(description: "Retrieve config.")
+    processCCResult(paymentId: String!, mac: String!): ProcessPaymentResultOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CreditCard\\RequestResult") @doc(description: "Process credit card response.")
+    processHCResult(paymentId: String!, mac: String!): ProcessPaymentResultOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\HostedCheckout\\RequestResult") @doc(description: "Process hosted checkout response.")
+    processRPResult(paymentId: String!, mac: String!): ProcessPaymentResultOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\HostedCheckout\\RequestResult") @doc(description: "Process redirect payment response.")
+}
+
+type CheckRedirectOutput {
+    url: String
+}
+
+type AvailablePaymentMethod {
+    icons: [IconDetailsOutput] @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\PaymentMethodIcons")
+}
+
+type IconDetailsOutput {
+    icon_title: String @doc(description: "Icon card type")
+    icon_url: String @doc(description: "Icon url")
+}
+
+type WorldlineConfig @doc(description:"Contains information.") {
+    url: String @doc(description:"URL for iFrame")
+    icons: [String] @doc(description:"List of enabled card types")
+}
+
+input PaymentMethodInput {
+    worldline_cc: WorldlineCcInput
+    worldline_cc_vault: WorldlineVaultInput
+    worldline_hosted_checkout: WorldlineHCInput
+    worldline_hosted_checkout_vault: WorldlineHCVaultInput
+    worldline_redirect_payment: WorldlineRPInput
+    worldline_redirect_payment_vault: WorldlineRPVaultInput
+}
+
+input WorldlineCcInput {
+    is_active_payment_token_enabler: Boolean! @doc(description:"States whether an entered by a customer credit/debit card should be tokenized for later usage. Required only if Vault is enabled for Worldline payment integration.")
+    hosted_tokenization_id: String @doc(description:"Contains a hosted tokenization id session provided by Worldline SDK and should be sent with sale transaction details to the Worldline payment gateway.")
+    color_depth: String
+    java_enabled: Boolean
+    locale: String
+    screen_height: String
+    screen_width: String
+    timezone_offset_utc_minutes: String
+}
+
+input WorldlineVaultInput {
+    public_hash: String!
+    hosted_tokenization_id: String @doc(description:"Contains a hosted tokenization id session provided by Worldline SDK and should be sent with sale transaction details to the Worldline payment gateway.")
+    color_depth: String
+    java_enabled: Boolean
+    locale: String
+    screen_height: String
+    screen_width: String
+    timezone_offset_utc_minutes: String
+}
+
+input WorldlineHCInput {
+    color_depth: String
+    java_enabled: Boolean
+    locale: String
+    screen_height: String
+    screen_width: String
+    timezone_offset_utc_minutes: String
+}
+
+input WorldlineHCVaultInput {
+    public_hash: String!
+    color_depth: String
+    java_enabled: Boolean
+    locale: String
+    screen_height: String
+    screen_width: String
+    timezone_offset_utc_minutes: String
+}
+
+input WorldlineRPInput {
+    selected_payment_product: Int @doc(description:"Selected payment product id.")
+    color_depth: String
+    java_enabled: Boolean
+    locale: String
+    screen_height: String
+    screen_width: String
+    timezone_offset_utc_minutes: String
+}
+
+input WorldlineRPVaultInput {
+    public_hash: String!
+    color_depth: String
+    java_enabled: Boolean
+    locale: String
+    screen_height: String
+    screen_width: String
+    timezone_offset_utc_minutes: String
+}
+
+type PaymentToken {
+    token: String @doc(description:"Gateway Token")
+}
+
+type ProcessPaymentResultOutput {
+    result: String
+    orderIncrementId: String
+    methodCode: String
+    paymentProductId: Int
+}
+
+type Mutation {
+    processCCCreateRequest(input: ProcessRequestInput): ProcessPaymentRequestOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CreditCard\\CreateRequest") @doc(description: "Process credit card create request.")
+    processHCRedirectRequest(input: ProcessRequestInput): ProcessPaymentRequestOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\HostedCheckout\\RequestRedirect") @doc(description: "Process hosted checkout redirect request.")
+    processRPRedirectRequest(input: ProcessRequestInput): ProcessPaymentRequestOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\RedirectPayment\\RequestRedirect") @doc(description: "Process redirect payment redirect request.")
+    calculateSurcharge(input: CalculateSurchargeInput): CalculateSurchargeOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CreditCard\\CalculateSurcharge")
+    updateSurchargeInformation(input: UpdateSurchargeInformationInput): UpdateSurchargeInformationOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\UpdateSurchargeInformation")
+}
+
+input ProcessRequestInput @doc(description: "Defines the input to run the processHCRedirectRequest mutation") {
+    cart_id: String! @doc(description: "The unique ID of a `Cart` object.")
+    payment_method: PaymentMethodRedirectInput! @doc(description: "The payment method data.")
+}
+
+input PaymentMethodRedirectInput {
+    code: String! @doc(description: "The internal name for the payment method.")
+}
+
+type ProcessPaymentRequestOutput {
+    redirect_url: String
+}
+
+input CalculateSurchargeInput {
+    cart_id: String! @doc(description: "The unique ID of a `Cart` object.")
+    hosted_tokenization_id: String @doc(description:"Contains a hosted tokenization id session provided by Worldline SDK and should be sent with sale transaction details to the Worldline payment gateway.")
+}
+
+type CalculateSurchargeOutput {
+    surcharging: String
+    note: String
+}
+
+input UpdateSurchargeInformationInput {
+    cart_id: String! @doc(description: "The unique ID of a `Cart` object")
+    selected_payment_method: String! @doc(description: "The selected payment method")
+}
+
+type UpdateSurchargeInformationOutput {
+    cart: Cart! @doc(description: "Describes the contents of the specified shopping cart")
+    amount: Float @doc(description: "Is the applied surcharge amount")
+    base_amount: Float @doc(description: "Is the applied surcharge base amount")
+    currency_code: String @doc(description: "Quote currency code")
+}
+
+type StoreConfig @doc(description: "The type contains information about a store config") {
+    worldline_pwa_route: String @doc(description: "Worldline General Custom Return URL")
+    worldline_is_apply_surcharge: Boolean @doc(description: "Worldline General Surcharging Config")
+    worldline_cc_vault_active: String @doc(description: "Worldline CC vault status")
+    worldline_payment_credit_card_allowspecific: Boolean @doc(description: "CC: Payment from Applicable Countries")
+    worldline_payment_credit_card_specificcountry: String @doc(description: "CC: Payment from Specific Countries")
+    worldline_payment_hosted_checkout_allowspecific: Boolean @doc(description: "HC: Payment from Applicable Countries")
+    worldline_payment_hosted_checkout_specificcountry: String @doc(description: "HC: Payment from Specific Countries")
+    worldline_redirect_payment_allowspecific: Boolean @doc(description: "RP: Payment from Applicable Countries")
+    worldline_redirect_payment_specificcountry: String @doc(description: "RP: Payment from Specific Countries")
+    worldline_redirect_payment_product_ids: PaymentProductIdsOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\RedirectPayment\\PaymentProductIds") @doc(description: "All payment products ids.")
+}
+
+type PaymentProductIdsOutput {
+    product_ids: String
+}
+
+type Cart {
+    worldline_surcharging: SurchargeInformationOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\SurchargingCartInformation") @doc(description: "Surcharging data in shopping cart query")
+}
+
+type SurchargeInformationOutput {
+    amount: Float @doc(description: "Is the applied surcharge amount")
+    base_amount: Float @doc(description: "Is the applied surcharge base amount")
+    currency_code: String @doc(description: "Quote currency code")
+}
