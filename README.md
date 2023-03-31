@@ -16,5 +16,8 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.0.1
+- Update core modules.
+
 #### 1.0.0
 - Initial version.
