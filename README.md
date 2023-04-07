@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.0.2
+- Add fix for Adobe Commerce cloud instances.
+
 #### 1.0.1
 - Update core modules.
 
