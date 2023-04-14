@@ -16,6 +16,10 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.1.0
+- Add support for the 5.0.0 version of PHP SDK.
+- Add support for the 13.0.0 PWA version and the surcharging functionality.
+
 #### 1.0.2
 - Add fix for Adobe Commerce cloud instances.
 

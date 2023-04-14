@@ -9,7 +9,7 @@ use Magento\Framework\GraphQl\Query\Resolver\ContextInterface;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Worldline\HostedCheckout\Model\ReturnRequestProcessor;
-use Worldline\PaymentCore\Model\OrderState;
+use Worldline\PaymentCore\Model\OrderState\OrderState;
 
 class RequestResult implements ResolverInterface
 {

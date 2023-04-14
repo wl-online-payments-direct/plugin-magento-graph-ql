@@ -23,7 +23,6 @@ type IconDetailsOutput {
 
 type WorldlineConfig @doc(description:"Contains information.") {
     url: String @doc(description:"URL for iFrame")
-    icons: [String] @doc(description:"List of enabled card types")
 }
 
 input PaymentMethodInput {
@@ -169,6 +168,10 @@ type PaymentProductIdsOutput {
 
 type Cart {
     worldline_surcharging: SurchargeInformationOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\SurchargingCartInformation") @doc(description: "Surcharging data in shopping cart query")
+}
+
+type OrderTotal {
+    worldline_surcharging: SurchargeInformationOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\SurchargingOrderInformation") @doc(description: "Surcharging data in customer order query")
 }
 
 type SurchargeInformationOutput {
