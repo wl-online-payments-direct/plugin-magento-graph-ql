@@ -6,7 +6,7 @@ namespace Worldline\GraphQl\Model\Resolver\CreditCard;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Worldline\CreditCard\Ui\ConfigProvider;
+use Worldline\CreditCard\Ui\ConfigProvider\CreateHostedTokenizationResponseProcessor;
 
 /**
  * Resolver to pull URL for iFrame
@@ -14,14 +14,14 @@ use Worldline\CreditCard\Ui\ConfigProvider;
 class WorldlineConfig implements ResolverInterface
 {
     /**
-     * @var ConfigProvider
+     * @var CreateHostedTokenizationResponseProcessor
      */
-    private $configProvider;
+    private $createHostedTokenizationResponseProcessor;
 
     public function __construct(
-        ConfigProvider $configProvider
+        CreateHostedTokenizationResponseProcessor $createHostedTokenizationResponseProcessor
     ) {
-        $this->configProvider = $configProvider;
+        $this->createHostedTokenizationResponseProcessor = $createHostedTokenizationResponseProcessor;
     }
 
     /**
@@ -35,17 +35,11 @@ class WorldlineConfig implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
     {
-        $url = '';
-        $icons = [];
-        $config = $this->configProvider->getConfig();
-        if (!empty($config['payment'])) {
-            $url = $config['payment'][ConfigProvider::CODE]['url'];
-            $icons = array_keys($config['payment'][ConfigProvider::CODE]['icons']);
-        }
+        $storeId = (int)$context->getExtensionAttributes()->getStore()->getId();
+        $createHostedTokenizationResponse = $this->createHostedTokenizationResponseProcessor->buildAndProcess($storeId);
 
         return [
-            'url' => $url,
-            'icons' => $icons
+            'url' => 'https://payment.' . $createHostedTokenizationResponse->getPartialRedirectUrl()
         ];
     }
 }

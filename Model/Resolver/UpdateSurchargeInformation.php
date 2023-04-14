@@ -11,6 +11,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\QuoteGraphQl\Model\Cart\GetCartForUser;
 use Worldline\CreditCard\Ui\ConfigProvider;
+use Worldline\PaymentCore\Api\QuoteTotalInterface;
 use Worldline\PaymentCore\Api\SurchargingQuoteRepositoryInterface;
 
 class UpdateSurchargeInformation implements ResolverInterface
@@ -21,15 +22,22 @@ class UpdateSurchargeInformation implements ResolverInterface
     private $getCartForUser;
 
     /**
+     * @var QuoteTotalInterface
+     */
+    private $quoteTotal;
+
+    /**
      * @var SurchargingQuoteRepositoryInterface
      */
     private $surchargingQuoteRepository;
 
     public function __construct(
         GetCartForUser $getCartForUser,
+        QuoteTotalInterface $quoteTotal,
         SurchargingQuoteRepositoryInterface $surchargingQuoteRepository
     ) {
         $this->getCartForUser = $getCartForUser;
+        $this->quoteTotal = $quoteTotal;
         $this->surchargingQuoteRepository = $surchargingQuoteRepository;
     }
 
@@ -60,14 +68,17 @@ class UpdateSurchargeInformation implements ResolverInterface
         $cart = $this->getCartForUser->execute($maskedCartId, $context->getUserId(), $storeId);
         $cart->getPayment()->setMethod($paymentMethod);
 
+        $paymentMethod = str_replace('_vault', '', $paymentMethod);
         if ($paymentMethod !== ConfigProvider::CODE) {
             $this->surchargingQuoteRepository->deleteByQuoteId((int)$cart->getId());
             return $this->getResultData($cart, $amount, $baseAmount);
         }
 
         $surchargingQuote = $this->surchargingQuoteRepository->getByQuoteId((int)$cart->getId());
+        $quoteTotal = $this->quoteTotal->getTotalAmount($cart);
+
         if ($paymentMethod === $surchargingQuote->getPaymentMethod()
-            && (float)$cart->getGrandTotal() === (float)$surchargingQuote->getQuoteGrandTotal()
+            && $quoteTotal === (float)$surchargingQuote->getQuoteTotalAmount()
         ) {
             $amount = (float)$surchargingQuote->getAmount();
             $baseAmount = (float)$surchargingQuote->getBaseAmount();

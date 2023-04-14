@@ -3,31 +3,23 @@ declare(strict_types=1);
 
 namespace Worldline\GraphQl\Model\Resolver;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
-use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\Resolver\ContextInterface;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Worldline\PaymentCore\Api\QuoteTotalInterface;
+use Magento\Sales\Api\Data\OrderInterface;
 use Worldline\PaymentCore\Api\SurchargingQuoteRepositoryInterface;
 
-class SurchargingCartInformation implements ResolverInterface
+class SurchargingOrderInformation implements ResolverInterface
 {
-    /**
-     * @var QuoteTotalInterface
-     */
-    private $quoteTotal;
-
     /**
      * @var SurchargingQuoteRepositoryInterface
      */
     private $surchargingQuoteRepository;
 
-    public function __construct(
-        QuoteTotalInterface $quoteTotal,
-        SurchargingQuoteRepositoryInterface $surchargingQuoteRepository
-    ) {
-        $this->quoteTotal = $quoteTotal;
+    public function __construct(SurchargingQuoteRepositoryInterface $surchargingQuoteRepository)
+    {
         $this->surchargingQuoteRepository = $surchargingQuoteRepository;
     }
 
@@ -38,24 +30,20 @@ class SurchargingCartInformation implements ResolverInterface
      * @param array|null $value
      * @param array|null $args
      * @return array
-     * @throws GraphQlInputException
+     * @throws LocalizedException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
     {
-        if (!isset($value['model'])) {
-            throw new GraphQlInputException(__('"model" value must be specified'));
+        if (!(($value['model'] ?? null) instanceof OrderInterface)) {
+            throw new LocalizedException(__('"model" value should be specified'));
         }
 
-        $cart = $value['model'];
+        $order = $value['model'];
         $amount = $baseAmount = 0.0;
-        $surchargingQuote = $this->surchargingQuoteRepository->getByQuoteId((int)$cart->getId());
-        $quoteTotal = $this->quoteTotal->getTotalAmount($cart);
+        $surchargingQuote = $this->surchargingQuoteRepository->getByQuoteId((int)$order->getQuoteId());
 
-        $paymentMethod = str_replace('_vault', '', (string)$cart->getPayment()->getMethod());
-        if ($paymentMethod === $surchargingQuote->getPaymentMethod()
-            && $quoteTotal === (float)$surchargingQuote->getQuoteTotalAmount()
-        ) {
+        if ($order->getPayment()->getMethod() === $surchargingQuote->getPaymentMethod()) {
             $amount = (float)$surchargingQuote->getAmount();
             $baseAmount = (float)$surchargingQuote->getBaseAmount();
         }
@@ -63,7 +51,7 @@ class SurchargingCartInformation implements ResolverInterface
         return [
             'amount' => $amount,
             'base_amount' => $baseAmount,
-            'currency_code' => $surchargingQuote->getAmount() ? $cart->getQuoteCurrencyCode() : null
+            'currency_code' => $surchargingQuote->getAmount() ? $order->getOrderCurrencyCode() : null
         ];
     }
 }

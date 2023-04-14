@@ -8,7 +8,7 @@ use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Worldline\CreditCard\Model\ReturnRequestProcessor;
-use Worldline\PaymentCore\Model\OrderState;
+use Worldline\PaymentCore\Model\OrderState\OrderState;
 
 class RequestResult implements ResolverInterface
 {
@@ -41,7 +41,7 @@ class RequestResult implements ResolverInterface
 
         try {
             /** @var OrderState $orderState */
-            $orderState = $this->returnRequestProcessor->processRequest($hostedTokenizationId);
+            $orderState = $this->returnRequestProcessor->processRequest(null, $hostedTokenizationId);
             if ($orderState->getState() === ReturnRequestProcessor::WAITING_STATE) {
                 $result['result'] = ReturnRequestProcessor::WAITING_STATE;
                 $result['methodCode'] = $orderState->getPaymentMethod();
