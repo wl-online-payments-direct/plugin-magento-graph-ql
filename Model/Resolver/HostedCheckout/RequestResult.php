@@ -42,7 +42,6 @@ class RequestResult implements ResolverInterface
         }
 
         try {
-            /** @var OrderState $orderState */
             $orderState = $this->returnRequestProcessor->processRequest($paymentId, $mac);
             if ($orderState->getState() === ReturnRequestProcessor::WAITING_STATE) {
                 $result['result'] = ReturnRequestProcessor::WAITING_STATE;

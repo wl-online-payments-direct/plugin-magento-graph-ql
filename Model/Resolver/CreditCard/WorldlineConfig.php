@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Worldline\GraphQl\Model\Resolver\CreditCard;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
@@ -30,7 +31,8 @@ class WorldlineConfig implements ResolverInterface
      * @param ResolveInfo $info
      * @param array|null $value
      * @param array|null $args
-     * @return array
+     * @return string[]
+     * @throws LocalizedException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
