@@ -37,7 +37,7 @@ class PaymentMethodIcons implements ResolverInterface
             throw new LocalizedException(__('"code" value should be specified'));
         }
 
-        $code = preg_replace('/[0-9]+/', '', $value['code']);
+        $code = preg_replace('/\d+/', '', $value['code']);
         $storeId = (int)$context->getExtensionAttributes()->getStore()->getId();
 
         return $this->iconsRetriever->getIcons($code, $value['code'], $storeId) ?? [];

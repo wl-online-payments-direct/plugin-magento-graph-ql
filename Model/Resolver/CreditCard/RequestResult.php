@@ -29,7 +29,6 @@ class RequestResult implements ResolverInterface
      * @param array|null $value
      * @param array|null $args
      * @return array
-     * @throws \Exception
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
@@ -40,7 +39,6 @@ class RequestResult implements ResolverInterface
         }
 
         try {
-            /** @var OrderState $orderState */
             $orderState = $this->returnRequestProcessor->processRequest(null, $hostedTokenizationId);
             if ($orderState->getState() === ReturnRequestProcessor::WAITING_STATE) {
                 $result['result'] = ReturnRequestProcessor::WAITING_STATE;
