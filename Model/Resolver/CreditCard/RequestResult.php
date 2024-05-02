@@ -40,6 +40,10 @@ class RequestResult implements ResolverInterface
 
         try {
             $orderState = $this->returnRequestProcessor->processRequest(null, $hostedTokenizationId);
+            if (!$orderState) {
+                return [];
+            }
+
             if ($orderState->getState() === ReturnRequestProcessor::WAITING_STATE) {
                 $result['result'] = ReturnRequestProcessor::WAITING_STATE;
                 $result['methodCode'] = $orderState->getPaymentMethod();
