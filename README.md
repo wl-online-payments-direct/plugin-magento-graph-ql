@@ -16,6 +16,10 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.11.0
+- Fixed issue where FPT (Fixed Product Tax) rates were not taken into account.
+- Update "wl-online-payments-direct/sdk-php" library to 5.16.1
+
 #### 1.10.0
 - Improved display of shipping costs on the payment page for Hosted Checkout and Redirect Payment.
 
