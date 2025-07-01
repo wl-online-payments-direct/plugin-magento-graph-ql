@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.13.0
+- Added 3DS exemption types to the plugin
+
 #### 1.12.0
 - Fixed validation for HTML template ID configuration. It is no longer required to have extension on HTML templates.
 - Fixed issue where items quantities in decimals were not taken into account.
