@@ -4,11 +4,11 @@
     "require": {
         "php": ">=7.3",
         "ext-json": "*",
-        "worldline/module-magento-payment-credit-card": "1.21.0",
-        "worldline/module-magento-payment-redirect-payment": "1.20.0"
+        "worldline/module-magento-payment-credit-card": "1.22.0",
+        "worldline/module-magento-payment-redirect-payment": "1.21.0"
     },
     "type": "magento2-module",
-    "version": "1.13.0",
+    "version": "1.14.0",
     "license": [
         "MIT"
     ],

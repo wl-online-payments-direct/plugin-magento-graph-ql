@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.14.0
+- Update plugin translations
+
 #### 1.13.0
 - Added 3DS exemption types to the plugin
 
