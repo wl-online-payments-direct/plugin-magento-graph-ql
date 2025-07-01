@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.15.0
+- Fixed order creation using Google Pay & Apple Pay
+
 #### 1.14.0
 - Update plugin translations
 
