@@ -35,7 +35,7 @@ class WorldlineConfig implements ResolverInterface
      * @throws LocalizedException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
+    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null): array
     {
         $storeId = (int)$context->getExtensionAttributes()->getStore()->getId();
         $createHostedTokenizationResponse = $this->createHostedTokenizationResponseProcessor->buildAndProcess($storeId);
