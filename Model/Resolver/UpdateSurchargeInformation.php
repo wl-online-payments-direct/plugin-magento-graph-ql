@@ -57,7 +57,7 @@ class UpdateSurchargeInformation implements ResolverInterface
      * @throws GraphQlNoSuchEntityException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
+    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null): array
     {
         $maskedCartId = $args['input']['cart_id'];
         if (!$maskedCartId) {

@@ -41,7 +41,7 @@ class SurchargingCartInformation implements ResolverInterface
      * @throws GraphQlInputException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
+    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null): array
     {
         if (!isset($value['model'])) {
             throw new GraphQlInputException(__('"model" value must be specified'));

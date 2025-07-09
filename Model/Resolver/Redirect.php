@@ -40,7 +40,7 @@ class Redirect implements ResolverInterface
      * @throws InputException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
+    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null): array
     {
         $orderIncrementId = $args['incrementId'];
         if (empty($orderIncrementId)) {

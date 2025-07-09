@@ -30,7 +30,7 @@ class CheckOrder implements ResolverInterface
      * @return bool
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): bool
+    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null): bool
     {
         if (empty($args['incrementId'])) {
             return false;

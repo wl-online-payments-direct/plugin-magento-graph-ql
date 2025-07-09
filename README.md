@@ -16,6 +16,10 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.16.0
+- Add compatibility with PHP 8.4
+- Update SDK version
+
 #### 1.15.0
 - Fixed order creation using Google Pay & Apple Pay
 

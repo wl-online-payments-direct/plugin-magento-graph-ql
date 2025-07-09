@@ -33,7 +33,7 @@ class SurchargingOrderInformation implements ResolverInterface
      * @throws LocalizedException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
+    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null): array
     {
         if (!(($value['model'] ?? null) instanceof OrderInterface)) {
             throw new LocalizedException(__('"model" value should be specified'));

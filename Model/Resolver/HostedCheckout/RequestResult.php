@@ -33,7 +33,7 @@ class RequestResult implements ResolverInterface
      * @return array
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
+    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null): array
     {
         $paymentId = $args['paymentId'] ?? '';
         $mac = $args['mac'] ?? '';
