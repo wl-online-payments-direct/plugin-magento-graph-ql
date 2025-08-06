@@ -16,6 +16,10 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.17.0
+- Add Mealvoucher payment product
+- Add CVCO (Cheque Vacances Connect Online) payment product
+
 #### 1.16.0
 - Add compatibility with PHP 8.4
 - Update SDK version
