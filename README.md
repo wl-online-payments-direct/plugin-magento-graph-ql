@@ -16,6 +16,10 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.19.0
+- Fix issue with showing split payment amounts on order details page for Mealvoucher transactions
+- Fix issue with showing Mealvoucher in full redirect
+
 #### 1.18.0
 - Fix logo issue for CB on checkout page
 - Fix PHP >= 8.2 issue with not sending parameter by reference
