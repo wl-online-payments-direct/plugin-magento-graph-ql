@@ -16,6 +16,13 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.25.0
+- Remove MealVouchers configuration from hosted checkout
+- Fix mobile payment method information not being shown in order details
+
+#### 1.24.0
+- Update payment brand logos
+
 #### 1.23.0
 - Add quote ID in request payload
 - Fix wrong IP address being sent on checkout
