@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+#### 1.27.0
+- Improved: Data mapping to flag correctly exemptions requests to 3-D Secure.
+
 #### 1.26.0
 - Add new payment method: Pledg
 
