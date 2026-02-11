@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.32.0
+- Fix: Stability for 3DS exemption capabilities
+
 ### 1.31.0
 - Improved exemptions capabilities related to 3DS exemption types
 - Added phone number formatter for sending API requests
