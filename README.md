@@ -16,11 +16,16 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.31.0
+- Improved exemptions capabilities related to 3DS exemption types
+- Added phone number formatter for sending API requests
+
 ### 1.30.0
-- Remove Mealvouchers logo from checkout page when using "Hosted Checkout (redirect to Worldline)"
+- Removed Mealvouchers logo from checkout page when using "Hosted Checkout (redirect to Worldline)"
 
 #### 1.29.0
 - Fix: Do not allow usage of decimals in the object cardPaymentMethodSpecificInput.paymentProduct130SpecificInput.threeDSecure.numberOfItems
+- Fix amount discrepancy issues
 
 #### 1.28.0
 - Added: Possibility to auto-include primary webhooks URL in the payload of payment request, and to configure up to 4 additional endpoints.
@@ -37,6 +42,8 @@ This addon is also included into:
 - Fix mobile payment method information not being shown in order details
 
 #### 1.24.0
+- Add allow amount discrepancy option
+- Fix print invoice issue
 - Update payment brand logos
 
 #### 1.23.0
