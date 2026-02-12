@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.34.0
+- Fix order creation when 3DS exemption configuration is disabled
+
 ### 1.32.0
 - Fix: Stability for 3DS exemption capabilities
 
