@@ -1,1 +1,1 @@
-Built from Worldline-Plugins/plugin-magento-graph-ql-PRE-RELEASE@1.35.0 on Mon Mar  2 09:13:43 UTC 2026
+Built from Worldline-Plugins/plugin-magento-graph-ql-PRE-RELEASE@1.38.0 on Tue Mar 24 15:29:06 UTC 2026

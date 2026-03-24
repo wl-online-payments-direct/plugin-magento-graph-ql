@@ -16,6 +16,17 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.38.0
+- Fixed: Creating an online invoice for orders
+- Fixed: Amount discrepancy check for non-worldline methods
+- Added: Debug log for API call when the Worldline stored card is deleted
+
+### 1.37.0
+- Fixed: Prevented cart loss after cancelled or declined payments on the Hosted payment page
+
+### 1.36.0
+- Added: Deleting a consumer’s stored token from their account now also deletes the token on the payment platform
+
 ### 1.35.0
 - Updated: Change iDEAL logo and label
 - Updated: Branding of Pledg changed to Sofinco
