@@ -16,6 +16,10 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.41.0
+- Added: Support for Illicado payment method
+- Upgrade PHP SDK to 8.3 version
+
 ### 1.40.0
 - Added: Linxo Connect payment method
 
