@@ -16,6 +16,10 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.42.0
+- Added: Configuration option to skip the Worldline payment confirmation page
+- Fixed: Mealvouchers product type mapping and line item adjustments
+
 ### 1.41.0
 - Added: Support for Illicado payment method
 - Upgrade PHP SDK to 8.3 version
