@@ -16,6 +16,16 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.45.0
+- Added: Soft-delete handling for quote-linked tables
+
+### 1.44.0
+- Fixed: Support new PAYID format
+
+### 1.43.0
+- Fixed: Fix the issue with cart staying active despite the order being placed
+- Fixed: Add check if the store is connected to Worldline before retrieving products from API
+
 ### 1.42.0
 - Added: Configuration option to skip the Worldline payment confirmation page
 - Fixed: Mealvouchers product type mapping and line item adjustments

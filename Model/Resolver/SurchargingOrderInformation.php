@@ -41,7 +41,7 @@ class SurchargingOrderInformation implements ResolverInterface
 
         $order = $value['model'];
         $amount = $baseAmount = 0.0;
-        $surchargingQuote = $this->surchargingQuoteRepository->getByQuoteId((int)$order->getQuoteId());
+        $surchargingQuote = $this->surchargingQuoteRepository->getByQuoteIdIncludingDeleted((int)$order->getQuoteId());
 
         if ($order->getPayment()->getMethod() === $surchargingQuote->getPaymentMethod()) {
             $amount = (float)$surchargingQuote->getAmount();
