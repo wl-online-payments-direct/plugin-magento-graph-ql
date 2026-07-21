@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.47.0
+- Fixed: Fixing security issues
+
 ### 1.46.0
 - Added: New signature types options for SEPA Direct Debit
 

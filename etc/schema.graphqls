@@ -1,7 +1,6 @@
 type Query {
     checkRedirect(incrementId: String!): CheckRedirectOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\Redirect") @doc(description: "Retrieve redirect status.")
     checkOrder(incrementId: String!): Boolean @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CheckOrder") @doc(description: "Check if exist the order.")
-    processPendingOrder(incrementId: String!): Boolean @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\ProcessPendingOrder") @doc(description: "Send request to payment system and place order.")
     getWorldlineConfig: WorldlineConfig @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CreditCard\\WorldlineConfig") @doc(description: "Retrieve config.")
     processCCResult(paymentId: String!, mac: String!): ProcessPaymentResultOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CreditCard\\RequestResult") @doc(description: "Process credit card response.")
     processHCResult(paymentId: String!, mac: String!): ProcessPaymentResultOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\HostedCheckout\\RequestResult") @doc(description: "Process hosted checkout response.")
@@ -112,6 +111,7 @@ type Mutation {
     processRPRedirectRequest(input: ProcessRequestInput): ProcessPaymentRequestOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\RedirectPayment\\RequestRedirect") @doc(description: "Process redirect payment redirect request.")
     calculateSurcharge(input: CalculateSurchargeInput): CalculateSurchargeOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\CreditCard\\CalculateSurcharge")
     updateSurchargeInformation(input: UpdateSurchargeInformationInput): UpdateSurchargeInformationOutput @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\UpdateSurchargeInformation")
+    processPendingOrder(incrementId: String!, cartId: String): Boolean @resolver(class: "\\Worldline\\GraphQl\\Model\\Resolver\\ProcessPendingOrder") @doc(description: "Send request to payment system and place order. Ownership is enforced: for a logged-in customer the caller is bound to the authenticated user (the cart_id argument is ignored); a guest must pass cart_id, the masked id of the guest cart that issued the increment id.")
 }
 
 input ProcessRequestInput @doc(description: "Defines the input to run the processHCRedirectRequest mutation") {
