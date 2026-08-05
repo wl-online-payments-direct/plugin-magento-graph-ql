@@ -16,6 +16,11 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.48.0
+- Fixed: Connection error when saving API and Webhook credentials on PHP 8.5 and Magento 2.4.9
+- Fixed: Order details rendering for split payments
+- Changed: Update Sofinco payment method title on the checkout
+
 ### 1.47.0
 - Fixed: Fixing security issues
 
