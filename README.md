@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.49.0
+- Changed: Card saving now requires an enabled vault and a logged in shopper
+
 ### 1.48.0
 - Fixed: Connection error when saving API and Webhook credentials on PHP 8.5 and Magento 2.4.9
 - Fixed: Order details rendering for split payments
