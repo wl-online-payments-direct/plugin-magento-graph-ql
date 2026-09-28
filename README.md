@@ -16,6 +16,9 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.51.0
+- Changed: Remove constraint to be logged in for Mealvouchers
+
 ### 1.50.0
 - Fixed: Adjust tax amounts rounding and prevent a validation amount failure
 
