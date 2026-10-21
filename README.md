@@ -16,6 +16,10 @@ This addon is also included into:
 
 ### Change log:
 
+### 1.52.0
+- Fixed: Validate checkout addresses before the payment redirect to prevent paid payments without an order
+- Fixed: Checkout page breaking when the address could not be saved to the address book
+
 ### 1.51.0
 - Changed: Remove constraint to be logged in for Mealvouchers
 
